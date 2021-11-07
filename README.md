@@ -1,1 +1,1 @@
-# pangea-ml-project
+# Pangea ML Project
