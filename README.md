@@ -13,3 +13,9 @@ pip install -r requirements.txt
 ```bash
 uvicorn main:app --reload
 ```
+
+## Run Tests
+
+```bash
+python -m unittest tests  
+```

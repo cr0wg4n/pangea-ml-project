@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from models import Query
+from modules.search import search
 
 app = FastAPI()
 
@@ -12,18 +13,13 @@ def root():
 
 @app.post("/model")
 def ask_to_model(query: Query):
-    q = query.content
-    return [
-        {
-            "url": "http://demodemo.com/demodemodemo",
-            "answer": "demo demodemodemo"
-        },
-        {
-            "url": "http://demodemo.com/demodemodemo",
-            "answer": "demo demodemodemo"
-        },
-        {
-            "url": "http://demodemo.com/demodemodemo",
-            "answer": "demo demodemodemo"
-        }
-    ]
+    question = query.content
+    response = search(question)
+    urls = [{
+        "url": site
+    } for site in response]
+    return {
+        "question": question,
+        "results": urls
+    }
+
