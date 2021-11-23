@@ -1,3 +1,4 @@
+const QA_URL = "http://localhost:8000/model"
 
 const app = new Vue({
   el: '#app',
@@ -47,6 +48,29 @@ const app = new Vue({
     this.loadData()
   },
   methods: {
+    createAnswers (data) {
+      data.forEach(item => {
+        this.addBotMessage(item.answer.answer, [item.url])
+      })
+    },
+    async makeQuestion (question) {
+      try {
+        const response = await fetch(QA_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            question
+          })
+        })
+        const data = await response.json()
+        this.createAnswers(data)
+      } catch (error) {
+        console.log(error)
+        return null
+      }
+    },
     addBotMessage (message, urls=[]) {
       const botMessage = {
         image: '/assets/img/logo.png',
@@ -57,9 +81,11 @@ const app = new Vue({
         answer: true
       }
       this.messages.push(botMessage)
+      scrollChatToBottom()
     },
     scrollChatToBottom () {
-      const chatScroll = document.getElementById('chat').scrollTop = 0
+      let div = document.getElementById('chat')
+      div.scrollTop = div.scrollHeight
     },
     addMessage () {
       const userMessage = {
@@ -71,8 +97,11 @@ const app = new Vue({
         answer: false
       }
       this.messages.push(userMessage)
+      this.makeQuestion(this.userMessage)
+      setTimeout(() => {
+        this.scrollChatToBottom()
+      }, 100);
       this.userMessage = ''
-      this.scrollChatToBottom()
     },
     shortUrl (url, n=30){
       return url.substring(0, n) + '...'
