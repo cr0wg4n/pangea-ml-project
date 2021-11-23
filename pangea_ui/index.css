@@ -28,6 +28,9 @@ a {
 .star{
   font-size: 20px;
 }
+.star.selected {
+  color: yellow;
+}
 .star:hover,
 .star:hover ~ label{
   color: yellow;

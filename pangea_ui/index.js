@@ -1,12 +1,86 @@
+
 const app = new Vue({
   el: '#app',
   data: () => ({
-    chat: false
+    chat: false,
+    userMessage: '',
+    messages: [
+      {
+        image: '/assets/img/logo.png',
+        message: '¿Tienes dudas?, yo te puedo ayudar',
+        urls: [],
+        stars: 0,
+        bot: true,
+        answer: false
+      },
+      {
+        image: 'https://avatars.dicebear.com/api/croodles-neutral/.svg',
+        message: '¿Donde puedo comer salteñas en cochabamba?',
+        urls: [],
+        stars: 0,
+        bot: false,
+        answer: false
+      },
+      {
+        image: '/assets/img/logo.png',
+        message: 'Salteñeria los Castores',
+        urls: [
+          'https://www.los-castores.com/Cochabamba/',
+        ],
+        stars: 2,
+        bot: true,
+        answer: true
+      },
+      {
+        image: '/assets/img/logo.png',
+        message: 'Salteñeria el Horno',
+        urls: [
+          'https://www.los-castores.com/Cochabamba/'
+        ],
+        stars: 3,
+        bot: true,
+        answer: true
+      }
+    ]
   }),
   created () {
     this.loadData()
   },
   methods: {
+    addBotMessage (message, urls=[]) {
+      const botMessage = {
+        image: '/assets/img/logo.png',
+        message,
+        urls,
+        stars: 0,
+        bot:true,
+        answer: true
+      }
+      this.messages.push(botMessage)
+    },
+    scrollChatToBottom () {
+      const chatScroll = document.getElementById('chat').scrollTop = 0
+    },
+    addMessage () {
+      const userMessage = {
+        image: 'https://avatars.dicebear.com/api/croodles-neutral/.svg',
+        message: this.userMessage,
+        urls: [],
+        stars: 0,
+        bot: false,
+        answer: false
+      }
+      this.messages.push(userMessage)
+      this.userMessage = ''
+      this.scrollChatToBottom()
+    },
+    shortUrl (url, n=30){
+      return url.substring(0, n) + '...'
+    },
+    assingStar (messageId, stars=5)
+    {
+      this.messages[messageId].stars = parseInt(6-stars)
+    },
     loadData () {
       const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd)
       // GDP per capita (avoiding countries with small pop)

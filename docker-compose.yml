@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  pangea_ui:
+    build: 
+      context: ./
+      dockerfile: ./.docker/Dockerfile.webapp
+    ports:
+      - 8000:80
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  # pangea_service:
+  #   build: 
+  #     context: ./
+  #     dockerfile: ./.docker/Dockerfile.service
+  #   ports:
+  #     - 9000:80
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "5"
