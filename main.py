@@ -44,6 +44,6 @@ def ask_to_model(query: Query):
                 "answer": answer,
                 "url": site["url"]
             })
-            
+
     ordered = sorted(answers, key=lambda x: x["answer"]["score"], reverse=True)
     return ordered

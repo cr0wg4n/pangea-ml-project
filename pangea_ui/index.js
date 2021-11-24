@@ -14,34 +14,34 @@ const app = new Vue({
         bot: true,
         answer: false
       },
-      {
-        image: 'https://avatars.dicebear.com/api/croodles-neutral/.svg',
-        message: '¿Donde puedo comer salteñas en cochabamba?',
-        urls: [],
-        stars: 0,
-        bot: false,
-        answer: false
-      },
-      {
-        image: '/assets/img/logo.png',
-        message: 'Salteñeria los Castores',
-        urls: [
-          'https://www.los-castores.com/Cochabamba/',
-        ],
-        stars: 2,
-        bot: true,
-        answer: true
-      },
-      {
-        image: '/assets/img/logo.png',
-        message: 'Salteñeria el Horno',
-        urls: [
-          'https://www.los-castores.com/Cochabamba/'
-        ],
-        stars: 3,
-        bot: true,
-        answer: true
-      }
+      // {
+      //   image: 'https://avatars.dicebear.com/api/croodles-neutral/.svg',
+      //   message: '¿Donde puedo comer salteñas en cochabamba?',
+      //   urls: [],
+      //   stars: 0,
+      //   bot: false,
+      //   answer: false
+      // },
+      // {
+      //   image: '/assets/img/logo.png',
+      //   message: 'Salteñeria los Castores',
+      //   urls: [
+      //     'https://www.los-castores.com/Cochabamba/',
+      //   ],
+      //   stars: 2,
+      //   bot: true,
+      //   answer: true
+      // },
+      // {
+      //   image: '/assets/img/logo.png',
+      //   message: 'Salteñeria el Horno',
+      //   urls: [
+      //     'https://www.los-castores.com/Cochabamba/'
+      //   ],
+      //   stars: 3,
+      //   bot: true,
+      //   answer: true
+      // }
     ]
   }),
   created () {
@@ -52,6 +52,7 @@ const app = new Vue({
       data.forEach(item => {
         this.addBotMessage(item.answer.answer, [item.url])
       })
+      this.scrollChatToBottom()
     },
     async makeQuestion (question) {
       try {
@@ -81,11 +82,12 @@ const app = new Vue({
         answer: true
       }
       this.messages.push(botMessage)
-      scrollChatToBottom()
     },
     scrollChatToBottom () {
-      let div = document.getElementById('chat')
-      div.scrollTop = div.scrollHeight
+      setTimeout(() => {
+        let div = document.getElementById('chat')
+        div.scrollTop = div.scrollHeight
+      }, 100);
     },
     addMessage () {
       const userMessage = {
@@ -98,9 +100,7 @@ const app = new Vue({
       }
       this.messages.push(userMessage)
       this.makeQuestion(this.userMessage)
-      setTimeout(() => {
-        this.scrollChatToBottom()
-      }, 100);
+      this.scrollChatToBottom()
       this.userMessage = ''
     },
     shortUrl (url, n=30){
