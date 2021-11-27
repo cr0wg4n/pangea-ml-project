@@ -2,11 +2,12 @@
 * { 
   margin: 0; 
   padding: 0;
+  box-sizing: border-box;
 }
 .block{
   color: white;
   position: absolute;
-  margin: 10px;
+  margin: 15px;
   padding: 10px;
   /* width: 100%;
   height: 100vh;
@@ -39,7 +40,7 @@ button {
   width: 100%;
   height: 100%;
   padding: 0 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: #6969dd;
   border-color: transparent;
   color: white;
@@ -55,7 +56,7 @@ input {
   background-color:  rgba(255, 255, 255, 0.3);
   border-color: transparent;
   height: 40px;
-  border-radius: 12px;
+  border-radius: 10px;
   color: white;
   font-size: 16px;
   padding-left: 5px;
@@ -89,8 +90,9 @@ body{
 }
 .chat-content{
   margin: 20px;
-  height: 600px;
+  height: 500px;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-width: thin; 
   scrollbar-color: #6969dd #c2c2c2;
 }
@@ -117,4 +119,96 @@ body{
 
 .information > .description{
   margin: 0 auto;
+}
+
+.select-input{
+  background-color: #6969dd;
+  border: transparent;
+  border-radius: 4px;
+  color: white;
+  font-size: 13px;
+  padding: 5px 10px;
+}
+
+#pangea-info-block{
+  display: none;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  .chat-content{
+    height: 400px;
+  }
+  #pangea-info-block{
+    display: none;
+    /* left: 0; 
+    bottom: 250px; 
+    width: 300px; */
+  }
+  #pangea-search-block{
+    display: none;
+  }
+  #pangea-logo-block{
+    top: 0; 
+    left: 0;
+  }
+  #pangea-chat-block {
+    width: 340px; 
+    right: 0;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+  .chat-content{
+    height: 550px;
+  }
+  #pangea-info-block{
+    display: block;
+    left: 0; 
+    bottom: 250px; 
+    width: 300px;
+  }
+  #pangea-search-block{
+    width: 450px;
+    top: 0; 
+    left: 0;
+    right: 0;
+    margin: 40px auto;
+  }
+  #pangea-logo-block{
+    top: 0; 
+    left: 0;
+  }
+  #pangea-chat-block {
+    width: 600px; 
+    right: 0;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+  .chat-content{
+    height: 550px;
+  }
+  #pangea-info-block{
+    display: block;
+    left: 0; 
+    bottom: 250px; 
+    width: 300px;
+  }
+  #pangea-search-block{
+    width: 600px;
+    top: 0; 
+    left: 0;
+    right: 0;
+    margin: 40px auto;
+  }
+  #pangea-chat-block {
+    width: 600px; 
+    right: 0;
+  }
 }

@@ -1,9 +1,13 @@
+// const QA_URL = "http://192.168.1.13:8000/model"
 const QA_URL = "http://pangea.brickheads.space:8000/model"
 
 const app = new Vue({
   el: '#app',
   data: () => ({
+    debug: false,
     chat: false,
+    language: 'es',
+    country: 'bo',
     userMessage: '',
     messages: [
       {
@@ -12,7 +16,8 @@ const app = new Vue({
         urls: [],
         stars: 0,
         bot: true,
-        answer: false
+        answer: false,
+        debug: {}
       },
       // {
       //   image: 'https://avatars.dicebear.com/api/croodles-neutral/.svg',
@@ -31,10 +36,7 @@ const app = new Vue({
       //   stars: 2,
       //   bot: true,
       //   answer: true
-      // },
-      // {
-      //   image: '/assets/img/logo.png',
-      //   message: 'Salteñeria el Horno',
+      // },languageo',
       //   urls: [
       //     'https://www.los-castores.com/Cochabamba/'
       //   ],
@@ -50,7 +52,7 @@ const app = new Vue({
   methods: {
     createAnswers (data) {
       data.forEach(item => {
-        this.addBotMessage(item.answer.answer, [item.url])
+        this.addBotMessage(item.answer.answer, [item.url], item.answer)
       })
       this.scrollChatToBottom()
     },
@@ -62,7 +64,9 @@ const app = new Vue({
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            question
+            question,
+            country: this.country,
+            language: this.language
           })
         })
         const data = await response.json()
@@ -72,14 +76,15 @@ const app = new Vue({
         return null
       }
     },
-    addBotMessage (message, urls=[]) {
+    addBotMessage (message, urls=[], debug={}) {
       const botMessage = {
         image: '/assets/img/logo.png',
         message,
         urls,
         stars: 0,
         bot:true,
-        answer: true
+        answer: true,
+        debug
       }
       this.messages.push(botMessage)
     },

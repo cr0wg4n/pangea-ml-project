@@ -30,10 +30,11 @@ def get_data(url):
         images = soup.find_all('img', src=True) 
         images = [image["src"] for image in images if image_detector(image["src"])]
         paragraphs = soup.find_all('p')
-        paragraphs = [paragraph.text for paragraph in paragraphs]
+        threshold = 40
+        paragraphs = [paragraph.text for paragraph in paragraphs if len(paragraph.text) > threshold]
         return {
             "paragraphs": paragraphs,
             "urls": urls,
             "images": images
         }
-    return None
+    return None 
