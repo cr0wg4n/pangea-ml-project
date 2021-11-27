@@ -1,4 +1,4 @@
-const QA_URL = "http://localhost:8000/model"
+const QA_URL = "http://pangea.brickheads.space:8000/model"
 
 const app = new Vue({
   el: '#app',
