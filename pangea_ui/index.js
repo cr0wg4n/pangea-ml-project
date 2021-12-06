@@ -1,5 +1,5 @@
-// const QA_URL = "http://192.168.1.13:8000/model"
-const QA_URL = "http://pangea.brickheads.space:8000/model"
+const QA_URL = "http://192.168.1.13:8000/model"
+// const QA_URL = "http://pangea.brickheads.space:8000/model"
 
 const app = new Vue({
   el: '#app',
@@ -77,6 +77,7 @@ const app = new Vue({
       }
     },
     addBotMessage (message, urls=[], debug={}) {
+      debug.urls = urls
       const botMessage = {
         image: '/assets/img/logo.png',
         message,
